@@ -2,8 +2,8 @@
 
 namespace app\tests\unit\entities\Employee;
 
-use app\entities\Employee\Events\EmployeeRenamed;
-use app\entities\Employee\ValueObjects\Name;
+use app\domain\entities\Employee\Events\EmployeeRenamed;
+use app\domain\entities\Employee\ValueObjects\Name;
 use Codeception\Test\Unit;
 
 class RenameTest extends Unit {

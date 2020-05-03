@@ -2,8 +2,8 @@
 
 namespace app\tests\unit\entities\Employee;
 
-use app\entities\Employee\Events\EmployeeArchived;
-use app\entities\Employee\ValueObjects\Name;
+use app\domain\entities\Employee\Events\EmployeeArchived;
+use app\domain\entities\Employee\ValueObjects\Name;
 use Codeception\Test\Unit;
 use DateTimeImmutable;
 

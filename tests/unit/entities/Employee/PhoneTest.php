@@ -2,10 +2,10 @@
 
 namespace app\tests\unit\entities\Employee;
 
-use app\entities\Employee\Events\EmployeePhoneAdded;
-use app\entities\Employee\Events\EmployeePhoneRemoved;
-use app\entities\Employee\Exceptions\PhoneAlreadyExistsException;
-use app\entities\Employee\ValueObjects\Phone;
+use app\domain\entities\Employee\Events\EmployeePhoneAdded;
+use app\domain\entities\Employee\Events\EmployeePhoneRemoved;
+use app\domain\entities\Employee\Exceptions\PhoneAlreadyExistsException;
+use app\domain\entities\Employee\ValueObjects\Phone;
 use Codeception\Test\Unit;
 
 class PhoneTest extends Unit {

@@ -2,8 +2,8 @@
 
 namespace app\tests\unit\entities\Employee;
 
-use app\entities\Employee\Events\EmployeeRemoved;
-use app\entities\Employee\Exceptions\RemoveActiveEmployeeException;
+use app\domain\entities\Employee\Events\EmployeeRemoved;
+use app\domain\entities\Employee\Exceptions\RemoveActiveEmployeeException;
 use Codeception\Test\Unit;
 
 class RemoveTest extends Unit {

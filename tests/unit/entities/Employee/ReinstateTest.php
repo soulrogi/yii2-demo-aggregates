@@ -2,8 +2,8 @@
 
 namespace app\tests\unit\entities\Employee;
 
-use app\entities\Employee\Events\EmployeeReinstated;
-use app\entities\Employee\Exceptions\RemoveActiveEmployeeException;
+use app\domain\entities\Employee\Events\EmployeeReinstated;
+use app\domain\entities\Employee\Exceptions\RemoveActiveEmployeeException;
 use Codeception\Test\Unit;
 use DateTimeImmutable;
 

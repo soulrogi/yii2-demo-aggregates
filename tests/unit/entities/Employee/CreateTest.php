@@ -2,13 +2,13 @@
 
 namespace app\tests\unit\entities\Employee;
 
-use app\entities\Employee\Employee;
-use app\entities\Employee\Exceptions\ContainAtLeastOnePhoneException;
-use app\entities\Employee\Exceptions\PhoneAlreadyExistsException;
-use app\entities\Employee\ValueObjects\Address;
-use app\entities\Employee\ValueObjects\Id;
-use app\entities\Employee\ValueObjects\Name;
-use app\entities\Employee\ValueObjects\Phone;
+use app\domain\entities\Employee\Employee;
+use app\domain\entities\Employee\Exceptions\ContainAtLeastOnePhoneException;
+use app\domain\entities\Employee\Exceptions\PhoneAlreadyExistsException;
+use app\domain\entities\Employee\ValueObjects\Address;
+use app\domain\entities\Employee\ValueObjects\Id;
+use app\domain\entities\Employee\ValueObjects\Name;
+use app\domain\entities\Employee\ValueObjects\Phone;
 use Codeception\Test\Unit;
 use DateTimeImmutable;
 

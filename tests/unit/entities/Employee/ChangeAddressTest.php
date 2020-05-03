@@ -2,8 +2,8 @@
 
 namespace app\tests\unit\entities\Employee;
 
-use app\entities\Employee\Events\EmployeeAddressChanged;
-use app\entities\Employee\ValueObjects\Address;
+use app\domain\entities\Employee\Events\EmployeeAddressChanged;
+use app\domain\entities\Employee\ValueObjects\Address;
 use Codeception\Test\Unit;
 
 class ChangeAddressTest extends Unit {
