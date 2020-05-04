@@ -11,9 +11,11 @@ services:
             #            XDEBUG_CONFIG: remote_host=${IP_HOST}           # Подстановка хоста для Linux (в файле .env необходимо указать IP)
             #            XDEBUG_CONFIG: remote_host=host.docker.internal # Подстановка хоста для MAC и Windows
             XDEBUG_CONFIG:  remote_host=host.docker.internal
+            PHP_IDE_CONFIG: "serverName=console"
         volumes:
             - ./:/var/www/app
             - ./docker/php-fpm/php.ini:/usr/local/etc/php/php.ini
+            - ./docker/php-fpm/.ash_history:/home/docker-user/.ash_history
         depends_on:
             - postgres
         networks:
@@ -36,6 +38,10 @@ services:
             POSTGRES_USER:     db_user
             POSTGRES_PASSWORD: db_pass
             POSTGRES_DB:       db_name
+        volumes:
+            - ./docker/postgres/data:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
         networks:
             - oop_net
 networks:
