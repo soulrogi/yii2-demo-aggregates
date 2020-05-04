@@ -11,11 +11,8 @@ class Status {
 	const ACTIVE   = 'active';
 	const ARCHIVED = 'archived';
 
-	/** @var string  */
-	protected $value;
-
-	/** @var DateTimeImmutable  */
-	protected $date;
+	protected string $value;
+	protected DateTimeImmutable $date;
 
 	public function __construct(
 		string $value,

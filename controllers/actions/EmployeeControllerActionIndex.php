@@ -9,6 +9,6 @@ use yii\web\Response;
 
 class EmployeeControllerActionIndex extends Action {
 	public function run(): Response {
-		$this->controller->asJson(['data' => 'Index action']);
+		return $this->controller->asJson(['data' => 'Index action']);
 	}
 }

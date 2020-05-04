@@ -7,14 +7,9 @@ namespace app\domain\entities\Employee\ValueObjects;
 use Assert\Assertion;
 
 class Phone {
-	/** @var int  */
-	protected $country;
-
-	/** @var string  */
-	protected $code;
-
-	/** @var string  */
-	protected $number;
+	protected int $country;
+	protected string $code;
+	protected string $number;
 
 	public function __construct(
 		int $country,

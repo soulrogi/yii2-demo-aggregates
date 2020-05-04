@@ -30,7 +30,7 @@ class EmployeeControllerActionCreate extends Action {
 	}
 
 	public function run(): Response {
-		if (!$this->form->load(Yii::$app->request->post(), '') && !$this->form->validate()) {
+		if (false === $this->form->load(Yii::$app->request->post(), '') && false === $this->form->validate()) {
 			return $this->controller->asJson(['data' => $this->id]);
 		}
 

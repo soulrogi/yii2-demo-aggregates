@@ -6,7 +6,7 @@ namespace app\domain\repositories\Employee;
 
 use app\domain\entities\Employee\Employee;
 use app\domain\entities\Employee\ValueObjects\Id;
-use app\domain\repositories\Employee\Exceptions\NotFoundException;
+use app\domain\repositories\Employee\Exceptions\EmployeeNotFoundException;
 use app\domain\repositories\EmployeeRepositoryInterface;
 
 class MemoryEmployeeRepository implements EmployeeRepositoryInterface {
@@ -14,7 +14,7 @@ class MemoryEmployeeRepository implements EmployeeRepositoryInterface {
 
 	public function get(Id $id): Employee {
 		if (false === isset($this->items[$id->getId()])) {
-			throw new NotFoundException('Employee not found.');
+			throw new EmployeeNotFoundException;
 		}
 
 		return clone $this->items[$id->getId()];

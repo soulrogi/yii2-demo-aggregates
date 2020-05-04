@@ -14,7 +14,7 @@ class EmployeeController extends Controller {
 
 	public function actions() {
 		return [
-			static::ACTION_INDEX => EmployeeControllerActionIndex::class,
+			static::ACTION_INDEX  => EmployeeControllerActionIndex::class,
 			static::ACTION_CREATE => EmployeeControllerActionCreate::class,
 		];
 	}

@@ -8,7 +8,7 @@ use app\domain\entities\Employee\ValueObjects\Id;
 use app\domain\entities\Employee\ValueObjects\Name;
 use app\domain\entities\Employee\ValueObjects\Phone;
 use app\domain\entities\Employee\ValueObjects\Status;
-use app\domain\repositories\Employee\Exceptions\NotFoundException;
+use app\domain\repositories\Employee\Exceptions\EmployeeNotFoundException;
 use app\domain\repositories\EmployeeRepositoryInterface;
 use app\tests\unit\entities\Employee\EmployeeBuilder;
 use Codeception\Test\Unit;
@@ -29,7 +29,7 @@ abstract class BaseRepositoryTest extends Unit {
 
 	public function testGetNotFound(): void
 	{
-		$this->expectException(NotFoundException::class);
+		$this->expectException(EmployeeNotFoundException::class);
 
 		$this->repository->get(new Id(uniqid()));
 	}
@@ -92,7 +92,7 @@ abstract class BaseRepositoryTest extends Unit {
 
 		$this->repository->remove($employee);
 
-		$this->expectException(NotFoundException::class);
+		$this->expectException(EmployeeNotFoundException::class);
 
 		$this->repository->get($id);
 	}
