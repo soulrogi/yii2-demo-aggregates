@@ -21,7 +21,6 @@ class SqlEmployeeRepositoryTest extends BaseRepositoryTest {
 		$this->tester->haveFixtures([
 			'employee' => EmployeeFixture::class,
 			'phones'   => EmployeePhoneFixture::class,
-			'status'   => EmployeeStatusFixture::class,
 		]);
 
 		$this->repository = new SqlEmployeeRepository(

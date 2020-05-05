@@ -21,7 +21,6 @@ use app\domain\entities\Employee\ValueObjects\Phone;
 use app\domain\entities\Employee\ValueObjects\Phones;
 use app\domain\entities\Employee\ValueObjects\Status;
 use app\domain\entities\EventTrait;
-use ArrayObject;
 use DateTimeImmutable;
 use DomainException;
 
@@ -39,8 +38,8 @@ class Employee implements AggregateRoot {
 	private Address $address;
 	private Phones $phones;
 	private DateTimeImmutable $createDate;
-	/** @var ArrayObject<Status> */
-	private ArrayObject $statuses;
+	/** @var Status[] */
+	private array $statuses = [];
 	//endregion
 
 	//region -- Public methods
@@ -55,7 +54,6 @@ class Employee implements AggregateRoot {
 		$this->name       = $name;
 		$this->address    = $address;
 		$this->createDate = $createDate;
-		$this->statuses   = new ArrayObject;
 		$this->phones     = new Phones($phones);
 
 		$this->addStatus(Status::ACTIVE, $createDate);
@@ -138,19 +136,17 @@ class Employee implements AggregateRoot {
 	}
 
 	public function getStatuses(): array {
-		return $this->statuses->getArrayCopy();
+		return $this->statuses;
 	}
 	//endregion
 
 	//region -- Private methods
 	private function addStatus($value, DateTimeImmutable $date): void {
-		$this->statuses->append(new Status($value, $date));
+		$this->statuses[] = new Status($value, $date);
 	}
 
 	private function getCurrentStatus(): Status {
-		$statuses = $this->statuses->getArrayCopy();
-
-		return end($statuses);
+		return end($this->statuses);
 	}
 	//endregion
 }

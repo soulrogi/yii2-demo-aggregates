@@ -13,16 +13,15 @@ use app\domain\entities\Employee\ValueObjects\Phones;
 use app\domain\entities\Employee\ValueObjects\Status;
 use app\domain\repositories\Employee\Exceptions\EmployeeNotFoundException;
 use app\domain\repositories\Employee\Exceptions\PhonesNotFoundException;
-use app\domain\repositories\Employee\Exceptions\StatusesNotFoundException;
 use app\domain\repositories\EmployeeRepositoryInterface;
 use app\domain\repositories\Hydrator;
-use ArrayObject;
 use DateTimeImmutable;
 use DateTimeInterface;
 use ProxyManager\Factory\LazyLoadingValueHolderFactory;
 use ProxyManager\Proxy\LazyLoadingInterface;
 use yii\db\Connection;
 use yii\db\Query;
+use yii\helpers\Json;
 
 /**
  * В связи с сохранением вложенных объектов часто возникает вопрос,
@@ -41,7 +40,6 @@ use yii\db\Query;
 class SqlEmployeeRepository implements EmployeeRepositoryInterface {
 	protected const TABLE_EMPLOYEES         = 'sql_employees';
 	protected const TABLE_EMPLOYEE_PHONES   = 'sql_employee_phones';
-	protected const TABLE_EMPLOYEE_STATUSES = 'sql_employee_statuses';
 
 	protected Connection $db;
 	protected Hydrator $hydrator;
@@ -99,37 +97,16 @@ class SqlEmployeeRepository implements EmployeeRepositoryInterface {
 				$proxy->setProxyInitializer(null); // Unset the initializer for the proxy instance
 			}
 		);
-
-		$statuses = $this->lazyFactory->createProxy(
-			ArrayObject::class,
-			function(&$target, LazyLoadingInterface $proxy) use ($id): void{
-				$statuses = (new Query)
-					->select('*')
-					->from(static::TABLE_EMPLOYEE_STATUSES)
-					->andWhere(['employee_id' => $id->getId()])
-					->orderBy('id')
-					->all($this->db)
-				;
-
-				if (false === $statuses) {
-					throw new StatusesNotFoundException;
-				}
-
-				$statusesModels = array_map(function(array $status): Status {
-					return new Status(
-						$status['value'],
-						new DateTimeImmutable($status['date'])
-					);
-				}, $statuses);
-
-				$target = new ArrayObject($statusesModels);
-
-				$proxy->setProxyInitializer(null); // Unset the initializer for the proxy instance
-			}
-		);
 		//endregion
 
 		//region -- Prepare data to insert into Employee
+		$statuses = array_map(function(array $status): Status {
+			return new Status(
+				$status['value'],
+				new DateTimeImmutable($status['date'])
+			);
+		}, Json::decode(Json::decode($employee['statuses']))); // todo разобраться почему так происходит!!!
+
 		$fields = [
 			'id'         => new Id($employee['id']),
 			'name'       => new Name(
@@ -164,7 +141,6 @@ class SqlEmployeeRepository implements EmployeeRepositoryInterface {
 			)->execute();
 
 			$this->updatePhones($employee);
-			$this->updateStatuses($employee);
 		});
 	}
 
@@ -177,7 +153,6 @@ class SqlEmployeeRepository implements EmployeeRepositoryInterface {
 			)->execute();
 
 			$this->updatePhones($employee);
-			$this->updateStatuses($employee);
 		});
 	}
 
@@ -223,42 +198,14 @@ class SqlEmployeeRepository implements EmployeeRepositoryInterface {
 		;
 	}
 
-	private function updateStatuses(Employee $employee): void {
-		/** @var ArrayObject|LazyLoadingInterface $statuses */
-		$field    = 'statuses';
-		$statuses = $this->hydrator->extract($employee, [$field])[$field];
-		if ($statuses instanceof LazyLoadingInterface && false === $statuses->isProxyInitialized()) {
-			return;
-		}
-
-		$this->db
-			->createCommand()
-			->delete(
-				static::TABLE_EMPLOYEE_STATUSES,
-				['employee_id' => $employee->getId()->getId()]
-			)
-			->execute()
-		;
-
-		$this->db
-			->createCommand()
-			->batchInsert(
-				static::TABLE_EMPLOYEE_STATUSES,
-				['employee_id', 'value', 'date'],
-				array_map(function (Status $status) use ($employee): array {
-					return [
-						'employee_id' => $employee->getId()->getId(),
-						'value'       => $status->getValue(),
-						'date'        => $status->getDate()->format(DateTimeInterface::ATOM),
-					];
-				}, $employee->getStatuses())
-			)
-			->execute()
-		;
-	}
-
 	private static function extractEmployeeData(Employee $employee): array {
-		$statuses = $employee->getStatuses();
+		$statuses     = $employee->getStatuses();
+		$statusesJson = Json::encode(array_map(function(Status $status): array {
+			return [
+				'value' => $status->getValue(),
+				'date'  => $status->getDate()->format(DATE_ATOM),
+			];
+		}, $statuses), JSON_FORCE_OBJECT);
 
 		return [
 			'id'              => $employee->getId()->getId(),
@@ -272,6 +219,7 @@ class SqlEmployeeRepository implements EmployeeRepositoryInterface {
 			'address_street'  => $employee->getAddress()->getStreet(),
 			'address_house'   => $employee->getAddress()->getHouse(),
 			'current_status'  => end($statuses)->getValue(),
+			'statuses'        => $statusesJson,
 		];
 	}
 }
