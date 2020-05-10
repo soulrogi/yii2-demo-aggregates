@@ -21,16 +21,38 @@ use app\domain\entities\Employee\ValueObjects\Phone;
 use app\domain\entities\Employee\ValueObjects\Phones;
 use app\domain\entities\Employee\ValueObjects\Status;
 use app\domain\entities\EventTrait;
+use app\domain\entities\InstantiateTrait;
+use app\domain\entities\LazyLoadTrait;
 use DateTimeImmutable;
 use DomainException;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
+use ProxyManager\Proxy\LazyLoadingInterface;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
+use yii\helpers\Json;
 
 /**
  * Cущность-агрегат предметной области Employee
  * со своей собственной бизнес-логикой
  * для описания объектов сотрудников
  */
-class Employee implements AggregateRoot {
-	use EventTrait;
+class Employee extends ActiveRecord implements AggregateRoot {
+	use EventTrait, InstantiateTrait, LazyLoadTrait;
+
+	//region -- ActiveRecord attributes
+	const ATTR_EMPLOYEE_ID              = 'employee_id';
+	const ATTR_EMPLOYEE_NAME_LAST       = 'employee_name_last';
+	const ATTR_EMPLOYEE_NAME_FIRST      = 'employee_name_first';
+	const ATTR_EMPLOYEE_NAME_MIDDLE     = 'employee_name_middle';
+	const ATTR_EMPLOYEE_ADDRESS_COUNTRY = 'employee_address_country';
+	const ATTR_EMPLOYEE_ADDRESS_REGION  = 'employee_address_region';
+	const ATTR_EMPLOYEE_ADDRESS_CITY    = 'employee_address_city';
+	const ATTR_EMPLOYEE_ADDRESS_STREET  = 'employee_address_street';
+	const ATTR_EMPLOYEE_ADDRESS_HOUSE   = 'employee_address_house';
+	const ATTR_EMPLOYEE_CREATE_DATE     = 'employee_create_date';
+	const ATTR_EMPLOYEE_CURRENT_STATUS  = 'employee_current_status';
+	const ATTR_EMPLOYEE_STATUSES        = 'employee_statuses';
+	//endregion
 
 	//region -- Private properties
 	private ID $id;
@@ -59,6 +81,8 @@ class Employee implements AggregateRoot {
 		$this->addStatus(Status::ACTIVE, $createDate);
 
 		$this->recordEvent(new EmployeeCreated($this->id));
+
+		parent::__construct();
 	}
 
 	public function rename(Name $name): void {
@@ -148,5 +172,105 @@ class Employee implements AggregateRoot {
 	private function getCurrentStatus(): Status {
 		return end($this->statuses);
 	}
+	//endregion
+
+	//region ######## INFRASTRUCTURE #########
+	public static function tableName(): string {
+		return 'ar_employees';
+	}
+
+	public function behaviors(): array {
+		return [[
+			        'class'     => SaveRelationsBehavior::class,
+			        'relations' => [
+				        static::RELATION_PHONES,
+				        static::RELATION_STATUSES
+			        ],
+		        ]];
+	}
+
+	public function transactions(): array {
+		return [static::SCENARIO_DEFAULT => static::OP_ALL];
+	}
+
+	public function afterFind(): void {
+		$this->id = new Id($this->getAttribute(static::ATTR_EMPLOYEE_ID));
+
+		$this->name = new Name(
+			$this->getAttribute(static::ATTR_EMPLOYEE_NAME_LAST),
+			$this->getAttribute(static::ATTR_EMPLOYEE_NAME_FIRST),
+			$this->getAttribute(static::ATTR_EMPLOYEE_NAME_MIDDLE)
+		);
+
+		$this->address = new Address(
+			$this->getAttribute(static::ATTR_EMPLOYEE_ADDRESS_COUNTRY),
+			$this->getAttribute(static::ATTR_EMPLOYEE_ADDRESS_REGION),
+			$this->getAttribute(static::ATTR_EMPLOYEE_ADDRESS_CITY),
+			$this->getAttribute(static::ATTR_EMPLOYEE_ADDRESS_STREET),
+			$this->getAttribute(static::ATTR_EMPLOYEE_ADDRESS_HOUSE),
+		);
+
+		$this->createDate = new DateTimeImmutable($this->getAttribute(static::ATTR_EMPLOYEE_CREATE_DATE));
+
+		$this->phones = static::getLazyFactory()->createProxy(
+			Phones::class,
+			function(&$target, LazyLoadingInterface $proxy): void {
+				$target = new Phones($this->{static::RELATION_PHONES});
+				$proxy->setProxyInitializer();
+			}
+		);
+
+		$this->statuses = array_map(function($row): Status {
+			return new Status(
+				$row['value'],
+				new DateTimeImmutable($row['date'])
+			);
+		}, Json::decode($this->getAttribute(static::ATTR_EMPLOYEE_STATUSES)));
+
+		parent::afterFind();
+	}
+
+	public function beforeSave($insert): bool {
+		$this->setAttribute(static::ATTR_EMPLOYEE_ID, $this->id->getId());
+		$this->setAttribute(static::ATTR_EMPLOYEE_NAME_LAST, $this->name->getLast());
+		$this->setAttribute(static::ATTR_EMPLOYEE_NAME_FIRST, $this->name->getFirst());
+		$this->setAttribute(static::ATTR_EMPLOYEE_NAME_MIDDLE, $this->name->getMiddle());
+		$this->setAttribute(static::ATTR_EMPLOYEE_ADDRESS_COUNTRY, $this->address->getCountry());
+		$this->setAttribute(static::ATTR_EMPLOYEE_ADDRESS_REGION, $this->address->getRegion());
+		$this->setAttribute(static::ATTR_EMPLOYEE_ADDRESS_CITY, $this->address->getCity());
+		$this->setAttribute(static::ATTR_EMPLOYEE_ADDRESS_STREET, $this->address->getStreet());
+		$this->setAttribute(static::ATTR_EMPLOYEE_ADDRESS_HOUSE, $this->address->getHouse());
+		$this->setAttribute(static::ATTR_EMPLOYEE_CREATE_DATE, $this->getCreateDate()->format(DateTimeImmutable::ATOM));
+		$this->setAttribute(static::ATTR_EMPLOYEE_CURRENT_STATUS, $this->getCurrentStatus()->getValue());
+
+		if (false === ($this->phones instanceof LazyLoadingInterface) || $this->phones->isProxyInitialized()) {
+			$this->{static::RELATION_PHONES} = $this->phones->getAll();
+		}
+
+		$statuses = array_map(function(Status $status): array {
+			return [
+				Status::VALUE => $status->getValue(),
+				Status::DATE  => $status->getDate()->format(DATE_ATOM),
+			];
+		}, $this->statuses);
+
+		$this->setAttribute(static::ATTR_EMPLOYEE_STATUSES, Json::encode($statuses));
+
+		return parent::beforeSave($insert);
+	}
+
+	public function getRelatedPhones(): ActiveQuery {
+		return $this->hasMany(Phone::class, [
+			                                  Phone::ATTR_PHONE_EMPLOYEE_ID => static::ATTR_EMPLOYEE_ID]
+		)->orderBy(Phone::ATTR_PHONE_ID);
+	}
+	const RELATION_PHONES = 'relatedPhones';
+
+	public function getRelatedStatuses(): ActiveQuery {
+		return $this->hasMany(Status::class, [
+			                                   Status::ATTR_STATUS_EMPLOYEE_ID => static::ATTR_EMPLOYEE_ID]
+		)->orderBy(Status::ATTR_STATUS_ID);
+	}
+	const RELATION_STATUSES = 'relatedStatuses';
 	//endregion
 }

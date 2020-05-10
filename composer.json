@@ -21,7 +21,8 @@
         "ramsey/uuid": "^4.0",
         "beberlei/assert": "^3.2",
 	    "ext-pdo": "*",
-        "ocramius/proxy-manager": "^2.8"
+        "ocramius/proxy-manager": "^2.8",
+        "la-haute-societe/yii2-save-relations-behavior": "^1.7"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

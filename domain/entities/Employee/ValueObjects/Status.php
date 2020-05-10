@@ -11,6 +11,9 @@ class Status {
 	const ACTIVE   = 'active';
 	const ARCHIVED = 'archived';
 
+	const VALUE = 'value';
+	const DATE  = 'date';
+
 	protected string $value;
 	protected DateTimeImmutable $date;
 

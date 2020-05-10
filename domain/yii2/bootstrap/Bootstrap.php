@@ -8,11 +8,10 @@ use app\domain\dispatchers\DummyEventDispatcher;
 use app\domain\dispatchers\EventDispatcherInterface;
 use app\domain\repositories\EmployeeRepositoryInterface;
 use app\domain\repositories\Hydrator;
-use app\domain\yii2\repositories\Employee\SqlEmployeeRepository;
+use app\domain\yii2\repositories\Employee\AREmployeeRepository;
 use ProxyManager\Factory\LazyLoadingValueHolderFactory;
 use Yii;
 use yii\base\BootstrapInterface;
-use yii\di\Instance;
 
 class Bootstrap implements BootstrapInterface {
 	protected const INSTANCE_DB = 'db';
@@ -35,8 +34,7 @@ class Bootstrap implements BootstrapInterface {
 
 		$container->setSingleton(
 			EmployeeRepositoryInterface::class,
-			SqlEmployeeRepository::class,
-			[Instance::of(static::INSTANCE_DB)]
+			AREmployeeRepository::class
 		);
 	}
 }
