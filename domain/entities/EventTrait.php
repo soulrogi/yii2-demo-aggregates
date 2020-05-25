@@ -1,12 +1,12 @@
 <?php
 
-namespace app\domain\entities;
+declare(strict_types=1);
 
-use app\domain\entities\Employee\Events\Event;
+namespace app\domain\entities;
 
 trait EventTrait {
 	/** @var Event[] */
-	private $events;
+	private array $events = [];
 
 	public function releaseEvents(): array {
 		$events       = $this->events;
