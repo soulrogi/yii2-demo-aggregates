@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace app\domain\entities\Order\Decorators\Discount;
+namespace app\domain\entities\Order\Decorators\Implementations\Discount;
 
 use app\domain\entities\Order\Decorators\CommonDecorator;
-use app\domain\entities\Order\Decorators\Discount\ValueObjects\Discount;
+use app\domain\entities\Order\Decorators\Implementations\Discount\ValueObjects\Discount;
 use app\domain\entities\Order\OrderInterface;
 use app\domain\entities\Order\ValueObjects\Price;
 

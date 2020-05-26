@@ -12,25 +12,16 @@ use app\domain\entities\Order\ValueObjects\Goods;
 use app\domain\entities\Order\ValueObjects\Id;
 use app\domain\entities\Order\ValueObjects\Price;
 
-/**
- * Базовый класс Декоратора следует тому же интерфейсу, что и другие компоненты.
- * Основная цель этого класса - определить интерфейс обёртки для всех конкретных
- * декораторов. Реализация кода обёртки по умолчанию может включать в себя поле
- * для хранения завёрнутого компонента и средства его инициализации.
- */
-abstract class CommonDecorator implements OrderInterface, DecoratorInterface {
+abstract class CommonDecorator implements DecoratorInterface {
 	use EventTrait;
 
-	/** @var OrderInterface|CommonDecorator */
+	/** @var OrderInterface|DecoratorInterface */
 	protected OrderInterface $order;
 
 	public function __construct(OrderInterface $order) {
 		$this->order = $order;
 	}
 
-	/**
-	 * @return CommonDecorator|OrderInterface
-	 */
 	public function getOrder(): OrderInterface {
 		return $this->order;
 	}
@@ -52,8 +43,6 @@ abstract class CommonDecorator implements OrderInterface, DecoratorInterface {
 	}
 
 	/**
-	 * @param OrderInterface|CommonDecorator $order
-	 *
 	 * @return string[]
 	 */
 	public function getInterfacesAddedDecorators(): array {
@@ -66,12 +55,12 @@ abstract class CommonDecorator implements OrderInterface, DecoratorInterface {
 	}
 
 	/**
-	 * @param    OrderInterface|CommonDecorator $order
-	 * @param    string                         $interface
+	 * @param OrderInterface|DecoratorInterface $order
+	 * @param string                            $interface
 	 */
 	public function usedJustOnce(OrderInterface $order, string $interface): void {
 		if (
-			[] !== class_parents($order)
+			$order instanceof DecoratorInterface
 			&& array_key_exists($interface, $order->getInterfacesAddedDecorators())
 		) {
 			throw new CanBeUsedJustOnceException;

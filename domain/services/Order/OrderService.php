@@ -5,23 +5,10 @@ declare(strict_types=1);
 namespace app\domain\services\Order;
 
 use app\domain\dispatchers\EventDispatcherInterface;
-use app\domain\entities\Employee\Employee;
-use app\domain\entities\Employee\ValueObjects\Address;
-use app\domain\entities\Employee\ValueObjects\Id;
-use app\domain\entities\Employee\ValueObjects\Name;
-use app\domain\entities\Employee\ValueObjects\Phone;
 use app\domain\entities\Order\Builder\Builder;
 use app\domain\entities\Order\Builder\OrderDirector;
-use app\domain\entities\Order\Order;
+use app\domain\entities\Order\Decorators\Implementations\Discount\ValueObjects\Discount;
 use app\domain\entities\Order\OrderInterface;
-use app\domain\repositories\EmployeeRepositoryInterface;
-use app\domain\services\Employee\dto\AddressDto;
-use app\domain\services\Employee\dto\EmployeeArchiveDto;
-use app\domain\services\Employee\dto\EmployeeCreateDto;
-use app\domain\services\Employee\dto\EmployeeReinstateDto;
-use app\domain\services\Employee\dto\NameDto;
-use app\domain\services\Employee\dto\PhoneDto;
-use DateTimeImmutable;
 
 /**
  * Здесь сервис не особо большой и его действия совпадают с методами сущности.
@@ -46,10 +33,11 @@ class OrderService {
 //		todo создать заказ + заполнить его
 //		todo Сохранить во временное хранилище
 
-		$builder  = new Builder;
-		$director = new OrderDirector;
+		$builder  = new Builder; // у билдера должныбыть все интрументы для строительства заказа, Прокинуть через конструктор
 
-		$director->createOrderWithDiscount($builder);
+		OrderDirector::orderWithSeveralDiscount($builder);
+
+		$builder->addDiscount(new Discount(100, 'New Year2!!!'));
 
 		$order = $builder->getOrder();
 

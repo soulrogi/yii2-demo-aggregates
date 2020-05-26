@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace app\domain\entities\Order\Decorators\Payment\ValueObject;
+namespace app\domain\entities\Order\Decorators\Implementations\Delivery\ValueObjects;
 
-class Payment {
+class Delivery {
 	protected string $id;
 
 	public function __construct(string $id) {

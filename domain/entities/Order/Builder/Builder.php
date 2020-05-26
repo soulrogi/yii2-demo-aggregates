@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace app\domain\entities\Order\Builder;
 
-use app\domain\entities\Order\Decorators\Delivery\DeliveryDecorator;
-use app\domain\entities\Order\Decorators\Delivery\ValueObjects\Delivery;
-use app\domain\entities\Order\Decorators\Discount\DiscountDecorator;
-use app\domain\entities\Order\Decorators\Discount\ValueObjects\Discount;
-use app\domain\entities\Order\Decorators\Payment\PaymentDecorator;
-use app\domain\entities\Order\Decorators\Payment\ValueObject\Payment;
+use app\domain\entities\Order\Decorators\Implementations\Delivery\DeliveryDecorator;
+use app\domain\entities\Order\Decorators\Implementations\Delivery\ValueObjects\Delivery;
+use app\domain\entities\Order\Decorators\Implementations\Discount\DiscountDecorator;
+use app\domain\entities\Order\Decorators\Implementations\Discount\ValueObjects\Discount;
+use app\domain\entities\Order\Decorators\Implementations\Payment\PaymentDecorator;
+use app\domain\entities\Order\Decorators\Implementations\Payment\ValueObject\Payment;
 use app\domain\entities\Order\Order;
 use app\domain\entities\Order\OrderInterface;
 use app\domain\entities\Order\ValueObjects\Buyer;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace app\domain\entities\Order\Decorators\Delivery;
+namespace app\domain\entities\Order\Decorators\Implementations\Delivery;
 
 use app\domain\entities\Order\Decorators\CommonDecorator;
-use app\domain\entities\Order\Decorators\Delivery\ValueObjects\Delivery;
+use app\domain\entities\Order\Decorators\Implementations\Delivery\ValueObjects\Delivery;
 use app\domain\entities\Order\OrderInterface;
 
 class DeliveryDecorator extends CommonDecorator implements DeliveryDecoratorInterface {

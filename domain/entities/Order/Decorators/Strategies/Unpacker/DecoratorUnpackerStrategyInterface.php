@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace app\domain\entities\Order\Decorators;
+namespace app\domain\entities\Order\Decorators\Strategies\Unpacker;
 
 use app\domain\entities\Order\OrderInterface;
 

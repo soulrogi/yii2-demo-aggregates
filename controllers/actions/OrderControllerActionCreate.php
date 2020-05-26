@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace app\controllers\actions;
 
 use app\controllers\OrderController;
-use app\domain\entities\Order\Decorators\DecoratorHelper;
-use app\domain\entities\Order\Decorators\Delivery\DeliveryDecoratorInterface;
-use app\domain\entities\Order\Decorators\Delivery\ValueObjects\Delivery;
-use app\domain\entities\Order\Decorators\Discount\DiscountDecoratorInterface;
-use app\domain\entities\Order\Decorators\Discount\ValueObjects\Discount;
+use app\domain\entities\Order\Decorators\Helpers\DecoratorHelper;
+use app\domain\entities\Order\Decorators\Implementations\Delivery\DeliveryDecoratorInterface;
+use app\domain\entities\Order\Decorators\Implementations\Delivery\ValueObjects\Delivery;
+use app\domain\entities\Order\Decorators\Implementations\Discount\DiscountDecoratorInterface;
+use app\domain\entities\Order\Decorators\Implementations\Discount\ValueObjects\Discount;
 use app\domain\services\Order\OrderService;
 use app\domain\yii2\forms\OrderCreateForm;
 use DomainException;

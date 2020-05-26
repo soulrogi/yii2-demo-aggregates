@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace app\domain\entities\Order\Decorators\Discount\ValueObjects;
+namespace app\domain\entities\Order\Decorators\Implementations\Discount\ValueObjects;
 
 use Assert\Assertion;
 

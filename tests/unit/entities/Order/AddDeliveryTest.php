@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace app\tests\unit\entities\Order;
 
-use app\domain\entities\Order\Decorators\Discount\DiscountDecorator;
-use app\domain\entities\Order\Decorators\Discount\ValueObjects\Discount;
-use app\domain\entities\Order\Decorators\Payment\PaymentDecorator;
-use app\domain\entities\Order\Decorators\Payment\ValueObject\Payment;
 use app\domain\entities\Order\Order;
 use app\domain\entities\Order\ValueObjects\Buyer;
 use app\domain\entities\Order\ValueObjects\Goods;
