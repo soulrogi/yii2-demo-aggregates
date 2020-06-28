@@ -12,6 +12,7 @@ use app\domain\repositories\Hydrator;
 use ProxyManager\Factory\LazyLoadingValueHolderFactory;
 use Yii;
 use yii\base\BootstrapInterface;
+use yii\db\Connection;
 use yii\di\Instance;
 
 class Bootstrap implements BootstrapInterface {
@@ -24,9 +25,7 @@ class Bootstrap implements BootstrapInterface {
 
 		$container->setSingleton(LazyLoadingValueHolderFactory::class);
 
-		$container->setSingleton(static::INSTANCE_DB, function() use ($app) {
-			return $app->db;
-		});
+		$container->setSingleton(static::INSTANCE_DB, fn(): Connection => $app->db);
 
 		$container->setSingleton(
 			EventDispatcherInterface::class,

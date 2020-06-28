@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace app\controllers;
 
-use app\controllers\actions\EmployeeControllerActionCreate;
-use app\controllers\actions\EmployeeControllerActionIndex;
+use app\controllers\actions\employeeController\ActionCreate;
+use app\controllers\actions\employeeController\ActionIndex;
 use yii\web\Controller;
 
 class EmployeeController extends Controller {
@@ -14,8 +14,8 @@ class EmployeeController extends Controller {
 
 	public function actions() {
 		return [
-			static::ACTION_INDEX  => EmployeeControllerActionIndex::class,
-			static::ACTION_CREATE => EmployeeControllerActionCreate::class,
+			static::ACTION_INDEX  => ActionIndex::class,
+			static::ACTION_CREATE => ActionCreate::class,
 		];
 	}
 }

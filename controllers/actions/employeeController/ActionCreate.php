@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace app\controllers\actions;
+namespace app\controllers\actions\employeeController;
 
 use app\controllers\EmployeeController;
 use app\domain\services\Employee\EmployeeService;
@@ -12,7 +12,7 @@ use Yii;
 use yii\base\Action;
 use yii\web\Response;
 
-class EmployeeControllerActionCreate extends Action {
+class ActionCreate extends Action {
 	protected EmployeeService $service;
 	protected EmployeeCreateForm $form;
 

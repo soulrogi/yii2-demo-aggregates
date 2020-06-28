@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace app\controllers\actions;
+namespace app\controllers\actions\orderController;
 
 use app\controllers\OrderController;
 use app\domain\infrastructure\yii2\forms\OrderCreateForm;
@@ -14,7 +14,7 @@ use Yii;
 use yii\base\Action;
 use yii\web\Response;
 
-class OrderControllerActionCreate extends Action {
+class ActionCreate extends Action {
 	protected OrderCreateForm         $form;
 	protected OrderCreationService    $service;
 	protected ProviderInterface       $provider;
