@@ -14,7 +14,7 @@ class DeliveryUnpackerStrategy implements DecoratorUnpackerStrategyInterface {
 	 *
 	 * @return Delivery
 	 */
-	public static function getPayloads(OrderInterface $order): Delivery {
+	public function getPayloads(OrderInterface $order): Delivery {
 		return $order->getDelivery();
 	}
 }

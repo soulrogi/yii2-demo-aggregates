@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace app\domain\yii2\bootstrap;
+namespace app\domain\infrastructure\yii2\bootstrap;
 
 use app\domain\dispatchers\DummyEventDispatcher;
 use app\domain\dispatchers\EventDispatcherInterface;
+use app\domain\infrastructure\yii2\repositories\Employee\SqlEmployeeRepository;
 use app\domain\repositories\EmployeeRepositoryInterface;
 use app\domain\repositories\Hydrator;
-use app\domain\yii2\repositories\Employee\SqlEmployeeRepository;
 use ProxyManager\Factory\LazyLoadingValueHolderFactory;
 use Yii;
 use yii\base\BootstrapInterface;

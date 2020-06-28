@@ -2,15 +2,12 @@
 
 namespace app\domain\entities\Order\ValueObjects;
 
-use app\domain\entities\Employee\Exceptions\ContainAtLeastOnePhoneException;
-use app\domain\entities\Employee\Exceptions\PhoneAlreadyExistsException;
 use app\domain\entities\Order\Exceptions\DoesNotContainGoodsException;
 use app\domain\entities\Order\Exceptions\ItemIsNotFoundException;
-use DomainException;
 use Ramsey\Uuid\Uuid;
 
 class Goods {
-	/** @var Item[]  */
+	/** @var Item[] */
 	protected array $items = [];
 
 	public function __construct(array $items) {
@@ -34,19 +31,20 @@ class Goods {
 	}
 
 	public function remove(string $id): Item {
-		$items = array_filter($this->items, function(Item $item) use ($id): bool {
-			return $item->getId() === $id;
-		});
+		$foundItems = array_filter(
+			$this->items,
+			fn(Item $item): bool => ($item->getId() === $id)
+		);
 
-		if ([] === $items) {
+		if ([] === $foundItems) {
 			throw new ItemIsNotFoundException;
 		}
 
-		foreach (array_keys($items) as $key) {
+		foreach (array_keys($foundItems) as $key) {
 			unset($this->items[$key]);
 		}
 
-		return end($items);
+		return end($foundItems);
 	}
 
 	public function getAll(): array {

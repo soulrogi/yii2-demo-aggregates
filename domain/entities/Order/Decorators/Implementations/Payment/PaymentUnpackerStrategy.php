@@ -14,7 +14,7 @@ class PaymentUnpackerStrategy implements DecoratorUnpackerStrategyInterface {
 	 *
 	 * @return Payment
 	 */
-	public static function getPayloads(OrderInterface $order): Payment {
+	public function getPayloads(OrderInterface $order): Payment {
 		return $order->getPayment();
 	}
 }

@@ -5,52 +5,49 @@ declare(strict_types=1);
 namespace app\controllers\actions;
 
 use app\controllers\OrderController;
-use app\domain\entities\Order\Decorators\Helpers\DecoratorHelper;
-use app\domain\services\Order\OrderService;
-use app\domain\yii2\forms\OrderCreateForm;
-use DomainException;
+use app\domain\infrastructure\yii2\forms\OrderCreateForm;
+use app\domain\infrastructure\yii2\helper\ResponseDto;
+use app\domain\providers\Order\OrderProvider;
+use app\domain\providers\ProviderInterface;
+use app\domain\services\Order\OrderCreation\OrderCreationService;
+use Yii;
 use yii\base\Action;
-use yii\web\ErrorHandler;
 use yii\web\Response;
 
 class OrderControllerActionCreate extends Action {
-	protected OrderCreateForm $form;
-	protected ErrorHandler    $errorHandler;
-	protected OrderService    $service;
+	protected OrderCreateForm         $form;
+	protected OrderCreationService    $service;
+	protected ProviderInterface       $provider;
+	protected ResponseDto             $response;
 
 	public function __construct(
 		string $id,
 		OrderController $controller,
 		OrderCreateForm $form,
-		OrderService $orderService,
-		ErrorHandler $errorHandler,
+		OrderProvider $provider,
+		ResponseDto $response,
 		array $config = []
 	) {
-		$this->form         = $form;
-		$this->service      = $orderService;
-		$this->errorHandler = $errorHandler;
+		$this->form     = $form;
+		$this->provider = $provider;
+		$this->response = $response;
 
 		parent::__construct($id, $controller, $config);
 	}
 
 	public function run(): Response {
-		try {
-			$order      = $this->service->create();
-			$items      = $order->getGoods()->remove('e691b6ee-fe47-42d7-81c7-0794593f29f6');
-			$discounts  = DecoratorHelper::getDiscounts($order);
-			$deliveries = DecoratorHelper::getDeliveries($order);
+		if (false === $this->form->load(Yii::$app->request->post(), '')
+			&& false === $this->form->validate()
+		) {
+			$this->response->errors = $this->form->errors;
 
-			return $this->controller->asJson([
-				'OrderId'        => $order->getId()->getId(),
-				'Removed Item'   => $items->getId(),
-				'DiscountsNames' => $discounts,
-				'DeliveryId'     => end($deliveries)->getId(),
-			]);
+			return $this->controller->asJson($this->response);
 		}
-		catch (DomainException $e) {
-			$this->errorHandler->logException($e);
 
-			return $this->controller->asJson(['data' => $e->getMessage()]);
-		}
+		$this->response->result  = $this->provider->creat($this->form->getDto());
+		$this->response->errors  = $this->provider->getErrors();
+		$this->response->payload = $this->provider->getPayload();
+
+		return $this->controller->asJson($this->response);
 	}
 }

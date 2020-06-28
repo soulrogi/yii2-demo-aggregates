@@ -1,6 +1,7 @@
 <?php
 
-use app\domain\yii2\bootstrap\Bootstrap;
+
+use app\domain\infrastructure\yii2\bootstrap\Bootstrap;
 
 $params = require __DIR__ . '/params.php';
 $db     = require __DIR__ . '/test_db.php';

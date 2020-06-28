@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace app\tests\unit\repositories;
 
+use app\domain\infrastructure\yii2\repositories\Employee\SqlEmployeeRepository;
 use app\domain\repositories\Hydrator;
-use app\domain\yii2\repositories\Employee\SqlEmployeeRepository;
 use app\tests\_fixtures\EmployeeFixture;
 use app\tests\_fixtures\EmployeePhoneFixture;
 use app\tests\_fixtures\EmployeeStatusFixture;

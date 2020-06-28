@@ -1,0 +1,302 @@
+[27-Jun-2020 13:02:09 Asia/Riyadh] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/app/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction('site/error')
+#1 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(123): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#2 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "". in /var/www/app/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('', Array)
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/app/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/app/web/index.php(12): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'HOSTNAME' => 'd8278d820803',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'SHLVL' => '1',
+    'HOME' => '/home/docker-user',
+    'XDEBUG_CONFIG' => 'remote_host=host.docker.internal',
+    'PHP_IDE_CONFIG' => 'serverName=console',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'PHP_MD5' => '',
+    'PHP_VERSION' => '7.4.5',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+    'PHP_CPPFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'PHP_ASC_URL' => 'https://www.php.net/get/php-7.4.5.tar.xz.asc/from/this/mirror',
+    'PHP_URL' => 'https://www.php.net/get/php-7.4.5.tar.xz/from/this/mirror',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    'PHPIZE_DEPS' => 'autoconf 		dpkg-dev dpkg 		file 		g++ 		gcc 		libc-dev 		make 		pkgconf 		re2c',
+    'PWD' => '/var/www/app',
+    'PHP_SHA256' => 'd059fd7f55bdc4d2eada15a00a2976697010d3631ef6f83149cc5289e1f23c2c',
+    'USER' => 'docker-user',
+    'HTTP_ACCEPT_LANGUAGE' => 'en,ru;q=0.9',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br',
+    'HTTP_SEC_FETCH_DEST' => 'document',
+    'HTTP_SEC_FETCH_USER' => '?1',
+    'HTTP_SEC_FETCH_MODE' => 'navigate',
+    'HTTP_SEC_FETCH_SITE' => 'none',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_HOST' => 'localhost',
+    'REDIRECT_STATUS' => '200',
+    'SERVER_NAME' => 'oop.loc',
+    'SERVER_PORT' => '80',
+    'SERVER_ADDR' => '172.18.0.4',
+    'REMOTE_PORT' => '39158',
+    'REMOTE_ADDR' => '172.18.0.1',
+    'SERVER_SOFTWARE' => 'nginx/1.18.0',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'REQUEST_SCHEME' => 'http',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'DOCUMENT_ROOT' => '/var/www/app/web',
+    'DOCUMENT_URI' => '/index.php',
+    'REQUEST_URI' => '/',
+    'SCRIPT_NAME' => '/index.php',
+    'CONTENT_LENGTH' => '',
+    'CONTENT_TYPE' => '',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'SCRIPT_FILENAME' => '/var/www/app/web//index.php',
+    'FCGI_ROLE' => 'RESPONDER',
+    'PHP_SELF' => '/index.php',
+    'REQUEST_TIME_FLOAT' => 1593252129.15658092498779296875,
+    'REQUEST_TIME' => 1593252129,
+    'argv' => [],
+    'argc' => 0,
+]
+[28-Jun-2020 00:48:23 Asia/Riyadh] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/app/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction('site/error')
+#1 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(123): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#2 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "create/order/". in /var/www/app/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('create/order/', Array)
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/app/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/app/web/index.php(12): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'HOSTNAME' => 'd8278d820803',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'SHLVL' => '1',
+    'HOME' => '/home/docker-user',
+    'XDEBUG_CONFIG' => 'remote_host=host.docker.internal',
+    'PHP_IDE_CONFIG' => 'serverName=console',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'PHP_MD5' => '',
+    'PHP_VERSION' => '7.4.5',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+    'PHP_CPPFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'PHP_ASC_URL' => 'https://www.php.net/get/php-7.4.5.tar.xz.asc/from/this/mirror',
+    'PHP_URL' => 'https://www.php.net/get/php-7.4.5.tar.xz/from/this/mirror',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    'PHPIZE_DEPS' => 'autoconf 		dpkg-dev dpkg 		file 		g++ 		gcc 		libc-dev 		make 		pkgconf 		re2c',
+    'PWD' => '/var/www/app',
+    'PHP_SHA256' => 'd059fd7f55bdc4d2eada15a00a2976697010d3631ef6f83149cc5289e1f23c2c',
+    'USER' => 'docker-user',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_ACCEPT_LANGUAGE' => 'en-us',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Safari/605.1.15',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_HOST' => 'oop.loc',
+    'REDIRECT_STATUS' => '200',
+    'SERVER_NAME' => 'oop.loc',
+    'SERVER_PORT' => '80',
+    'SERVER_ADDR' => '172.18.0.4',
+    'REMOTE_PORT' => '36214',
+    'REMOTE_ADDR' => '172.18.0.1',
+    'SERVER_SOFTWARE' => 'nginx/1.18.0',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'REQUEST_SCHEME' => 'http',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'DOCUMENT_ROOT' => '/var/www/app/web',
+    'DOCUMENT_URI' => '/index.php',
+    'REQUEST_URI' => '/create/order/',
+    'SCRIPT_NAME' => '/index.php',
+    'CONTENT_LENGTH' => '',
+    'CONTENT_TYPE' => '',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'SCRIPT_FILENAME' => '/var/www/app/web//index.php',
+    'FCGI_ROLE' => 'RESPONDER',
+    'PHP_SELF' => '/index.php',
+    'REQUEST_TIME_FLOAT' => 1593294503.1260139942169189453125,
+    'REQUEST_TIME' => 1593294503,
+    'argv' => [],
+    'argc' => 0,
+]
+[28-Jun-2020 00:48:51 Asia/Riyadh] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/app/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction('site/error')
+#1 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(123): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#2 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "create/order/". in /var/www/app/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('create/order/', Array)
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/app/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/app/web/index.php(12): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'HOSTNAME' => 'd8278d820803',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'SHLVL' => '1',
+    'HOME' => '/home/docker-user',
+    'XDEBUG_CONFIG' => 'remote_host=host.docker.internal',
+    'PHP_IDE_CONFIG' => 'serverName=console',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'PHP_MD5' => '',
+    'PHP_VERSION' => '7.4.5',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+    'PHP_CPPFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'PHP_ASC_URL' => 'https://www.php.net/get/php-7.4.5.tar.xz.asc/from/this/mirror',
+    'PHP_URL' => 'https://www.php.net/get/php-7.4.5.tar.xz/from/this/mirror',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    'PHPIZE_DEPS' => 'autoconf 		dpkg-dev dpkg 		file 		g++ 		gcc 		libc-dev 		make 		pkgconf 		re2c',
+    'PWD' => '/var/www/app',
+    'PHP_SHA256' => 'd059fd7f55bdc4d2eada15a00a2976697010d3631ef6f83149cc5289e1f23c2c',
+    'USER' => 'docker-user',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_ACCEPT_LANGUAGE' => 'en-us',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Safari/605.1.15',
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=docker-user',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'HTTP_HOST' => 'oop.loc',
+    'REDIRECT_STATUS' => '200',
+    'SERVER_NAME' => 'oop.loc',
+    'SERVER_PORT' => '80',
+    'SERVER_ADDR' => '172.18.0.4',
+    'REMOTE_PORT' => '36214',
+    'REMOTE_ADDR' => '172.18.0.1',
+    'SERVER_SOFTWARE' => 'nginx/1.18.0',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'REQUEST_SCHEME' => 'http',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'DOCUMENT_ROOT' => '/var/www/app/web',
+    'DOCUMENT_URI' => '/index.php',
+    'REQUEST_URI' => '/create/order/',
+    'SCRIPT_NAME' => '/index.php',
+    'CONTENT_LENGTH' => '',
+    'CONTENT_TYPE' => '',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'SCRIPT_FILENAME' => '/var/www/app/web//index.php',
+    'FCGI_ROLE' => 'RESPONDER',
+    'PHP_SELF' => '/index.php',
+    'REQUEST_TIME_FLOAT' => 1593294530.8392550945281982421875,
+    'REQUEST_TIME' => 1593294530,
+    'argv' => [],
+    'argc' => 0,
+]
+[28-Jun-2020 00:49:15 Asia/Riyadh] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/app/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction('site/error')
+#1 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(123): yii\web\ErrorHandler->renderException(Object(yii\web\NotFoundHttpException))
+#2 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\NotFoundHttpException))
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "create/order/". in /var/www/app/vendor/yiisoft/yii2/base/Module.php:537
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('create/order/', Array)
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/app/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/app/web/index.php(12): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'HOSTNAME' => 'd8278d820803',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'SHLVL' => '1',
+    'HOME' => '/home/docker-user',
+    'XDEBUG_CONFIG' => 'remote_host=host.docker.internal',
+    'PHP_IDE_CONFIG' => 'serverName=console',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'PHP_MD5' => '',
+    'PHP_VERSION' => '7.4.5',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+    'PHP_CPPFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'PHP_ASC_URL' => 'https://www.php.net/get/php-7.4.5.tar.xz.asc/from/this/mirror',
+    'PHP_URL' => 'https://www.php.net/get/php-7.4.5.tar.xz/from/this/mirror',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    'PHPIZE_DEPS' => 'autoconf 		dpkg-dev dpkg 		file 		g++ 		gcc 		libc-dev 		make 		pkgconf 		re2c',
+    'PWD' => '/var/www/app',
+    'PHP_SHA256' => 'd059fd7f55bdc4d2eada15a00a2976697010d3631ef6f83149cc5289e1f23c2c',
+    'USER' => 'docker-user',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_ACCEPT_LANGUAGE' => 'en-us',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Safari/605.1.15',
+    'HTTP_COOKIE' => 'XDEBUG_SESSION=docker-user',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'HTTP_HOST' => 'oop.loc',
+    'REDIRECT_STATUS' => '200',
+    'SERVER_NAME' => 'oop.loc',
+    'SERVER_PORT' => '80',
+    'SERVER_ADDR' => '172.18.0.4',
+    'REMOTE_PORT' => '36232',
+    'REMOTE_ADDR' => '172.18.0.1',
+    'SERVER_SOFTWARE' => 'nginx/1.18.0',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'REQUEST_SCHEME' => 'http',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'DOCUMENT_ROOT' => '/var/www/app/web',
+    'DOCUMENT_URI' => '/index.php',
+    'REQUEST_URI' => '/create/order/',
+    'SCRIPT_NAME' => '/index.php',
+    'CONTENT_LENGTH' => '',
+    'CONTENT_TYPE' => '',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'SCRIPT_FILENAME' => '/var/www/app/web//index.php',
+    'FCGI_ROLE' => 'RESPONDER',
+    'PHP_SELF' => '/index.php',
+    'REQUEST_TIME_FLOAT' => 1593294554.6965410709381103515625,
+    'REQUEST_TIME' => 1593294554,
+    'argv' => [],
+    'argc' => 0,
+]

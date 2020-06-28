@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace app\domain\yii2\repositories\Employee;
+namespace app\domain\infrastructure\yii2\repositories\Employee;
 
 use app\domain\entities\Employee\Employee;
 use app\domain\entities\Employee\ValueObjects\Address;

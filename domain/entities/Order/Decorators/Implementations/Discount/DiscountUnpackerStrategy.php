@@ -14,7 +14,7 @@ class DiscountUnpackerStrategy implements DecoratorUnpackerStrategyInterface {
 	 *
 	 * @return Discount
 	 */
-	public static function getPayloads(OrderInterface $order): Discount {
+	public function getPayloads(OrderInterface $order): Discount {
 		return $order->getDiscount();
 	}
 }

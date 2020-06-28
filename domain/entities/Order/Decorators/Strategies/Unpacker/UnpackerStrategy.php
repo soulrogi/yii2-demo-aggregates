@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace app\domain\entities\Order\Decorators\Strategies\Unpacker;
 
+use app\domain\entities\Order\Decorators\Exceptions\UnpuckedStrategyNotFoundException;
 use app\domain\entities\Order\Decorators\Implementations\Delivery\DeliveryDecoratorInterface;
 use app\domain\entities\Order\Decorators\Implementations\Delivery\DeliveryUnpackerStrategy;
 use app\domain\entities\Order\Decorators\Implementations\Discount\DiscountDecoratorInterface;
 use app\domain\entities\Order\Decorators\Implementations\Discount\DiscountUnpackerStrategy;
 use app\domain\entities\Order\Decorators\Implementations\Payment\PaymentDecoratorInterface;
 use app\domain\entities\Order\Decorators\Implementations\Payment\PaymentUnpackerStrategy;
-use app\domain\entities\Order\Decorators\Exceptions\UnpuckedStrategyNotFoundException;
 
-class UnpackerStrategyProvider {
+class UnpackerStrategy {
 	protected const STRATEGIES = [
 		PaymentDecoratorInterface::class  => PaymentUnpackerStrategy::class,
 		DeliveryDecoratorInterface::class => DeliveryUnpackerStrategy::class,

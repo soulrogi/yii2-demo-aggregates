@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace app\domain\services\Order;
+namespace app\domain\services\Order\OrderCreation;
 
 use app\domain\dispatchers\EventDispatcherInterface;
 use app\domain\entities\Order\Builder\Builder;
@@ -18,7 +18,7 @@ use app\domain\entities\Order\OrderInterface;
  * и заполнять сущность командировочного листа.
  *
  */
-class OrderService {
+class OrderCreationService {
 	protected EventDispatcherInterface $dispatcher;
 
 	public function __construct(EventDispatcherInterface $dispatcher) {
@@ -27,7 +27,7 @@ class OrderService {
 
 	public function create(): OrderInterface {
 //      todo Получить товары из корзы
-//		todo Произвести запросы по АПИ всторонние сервисы
+//		todo Произвести запросы по АПИ в сторонние сервисы
 //		todo Выстовить резервы на товар
 //		todo сопутствующие фиччи
 //		todo создать заказ + заполнить его
@@ -37,7 +37,9 @@ class OrderService {
 
 		OrderDirector::orderWithSeveralDiscount($builder);
 
-		$builder->addDiscount(new Discount(100, 'New Year2!!!'));
+		$builder->addDiscount(
+			new Discount(100, 'New Year2!!!')
+		);
 
 		$order = $builder->getOrder();
 

@@ -59,8 +59,7 @@ abstract class CommonDecorator implements DecoratorInterface {
 	 * @param string                            $interface
 	 */
 	public function usedJustOnce(OrderInterface $order, string $interface): void {
-		if (
-			$order instanceof DecoratorInterface
+		if ($order instanceof DecoratorInterface
 			&& array_key_exists($interface, $order->getInterfacesAddedDecorators())
 		) {
 			throw new CanBeUsedJustOnceException;

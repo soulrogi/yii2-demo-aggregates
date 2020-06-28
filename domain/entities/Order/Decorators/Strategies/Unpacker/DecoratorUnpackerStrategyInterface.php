@@ -7,5 +7,5 @@ namespace app\domain\entities\Order\Decorators\Strategies\Unpacker;
 use app\domain\entities\Order\OrderInterface;
 
 interface DecoratorUnpackerStrategyInterface {
-	public static function getPayloads(OrderInterface $order);
+	public function getPayloads(OrderInterface $order);
 }
